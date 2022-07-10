@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://menu/assets/KdamThmorPro-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://game/button_handler.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=37]
+
+[sub_resource type="StyleBoxFlat" id=34]
+bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
+
+[sub_resource type="StyleBoxFlat" id=35]
+bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
+
+[sub_resource type="StyleBoxFlat" id=36]
+bg_color = Color( 0.0392157, 0.368627, 0, 1 )
+
+[sub_resource type="DynamicFont" id=28]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=29]
+default_font = SubResource( 28 )
+Button/styles/focus = SubResource( 37 )
+Button/styles/hover = SubResource( 34 )
+Button/styles/normal = SubResource( 35 )
+Button/styles/pressed = SubResource( 36 )
+
+[sub_resource type="StyleBoxFlat" id=38]
+bg_color = Color( 0.117647, 0.141176, 0.384314, 0.74902 )
+
+[sub_resource type="DynamicFont" id=31]
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=32]
+default_font = SubResource( 31 )
+
+[node name="EventEnd" type="Panel"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -225.0
+margin_right = 200.0
+margin_bottom = 225.0
+theme = SubResource( 29 )
+custom_styles/panel = SubResource( 38 )
+
+[node name="olayAdi" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -87.0
+margin_right = 87.0
+margin_bottom = 50.0
+text = "Event Name"
+align = 1
+autowrap = true
+
+[node name="olayHakkinda" type="RichTextLabel" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = -400.0
+margin_right = -12.0
+theme = SubResource( 32 )
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra tortor at faucibus convallis. Cras a ex erat. In a ex urna. Vivamus ut tellus in elit pretium ornare. Praesent suscipit tellus vitae mattis laoreet. Fusce ullamcorper rutrum risus. Ut sed quam vitae lectus mollis venenatis. Vestibulum semper tortor nec nulla congue, pellentesque dapibus nisl facilisis. Aenean id orci ac risus euismod dictum quis vel mi. Suspendisse pote"
+
+[node name="exit" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -55.0
+margin_top = -66.0
+margin_right = 65.0
+margin_bottom = -26.0
+rect_min_size = Vector2( 120, 40 )
+script = ExtResource( 2 )

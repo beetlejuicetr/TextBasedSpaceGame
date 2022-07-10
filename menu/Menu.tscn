@@ -1,0 +1,154 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://menu/assets/KdamThmorPro-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://menu/Menu.gd" type="Script" id=2]
+[ext_resource path="res://menu/gevis_efekti.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.113725, 0.278431, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.584314, 0.584314, 0.584314, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.364706, 0.364706, 0.364706, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.321569, 0.545098, 0.207843, 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+Button/styles/focus = SubResource( 8 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
+
+[sub_resource type="Shader" id=11]
+code = "//---CRT Shader---
+shader_type canvas_item;
+
+uniform float scanline_count : hint_range(0, 1800) = 50.0;
+
+vec2 uv_curve(vec2 uv)
+{
+	uv = (uv - 0.5) * 2.0;
+	
+	//You can modify the numbers and try different values
+	uv.x *= 1.1 + pow(abs(uv.y) / 3.0, 2.0);
+	uv.y *= 1.1 + pow(abs(uv.x) / 3.0, 2.0);
+	
+	//The scale part (you can delete it when you want)
+	uv /= 1.2;
+	
+	uv = (uv/2.0) + 0.5;
+	return uv;
+}
+
+
+void fragment()
+{	
+	float PI = 3.14159;
+	
+	//You can modify the *3.0, *-3.0 for a bigger or smaller 
+	float r = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*0.0), 0.0).r;
+	float g = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*1.0), 0.0).g;
+	float b = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*-1.0), 0.0).b;
+	
+	
+	//If you dont want scanlines you can just delete this part
+	float s = sin(uv_curve(SCREEN_UV).y * scanline_count * PI * 2.0);
+	s = (s * 0.5 + 0.5) * 0.9 + 0.1;
+	vec4 scan_line = vec4(vec3(pow(s, 0.25)), 1.0);
+	
+	
+	COLOR = vec4(r, g, b, 1.0) * scan_line;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 11 )
+shader_param/scanline_count = 50.0
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.113725, 0.113725, 0.113725, 0.168627 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 6 )
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="glitch" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.584314, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="bg" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0666667, 0.0627451, 0.0627451, 1 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -247.5
+margin_top = -360.0
+margin_right = 247.5
+margin_bottom = 360.0
+custom_styles/panel = SubResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -360.0
+margin_right = 200.0
+margin_bottom = 360.0
+alignment = 1
+
+[node name="oyna" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 206.0
+margin_right = 400.0
+margin_bottom = 306.0
+rect_min_size = Vector2( 400, 100 )
+text = "Oyna"
+
+[node name="ayarlar" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 310.0
+margin_right = 400.0
+margin_bottom = 410.0
+rect_min_size = Vector2( 400, 100 )
+text = "Ayarlar"
+
+[node name="hakkinda" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 414.0
+margin_right = 400.0
+margin_bottom = 514.0
+rect_min_size = Vector2( 400, 100 )
+text = "Hakkında"
+
+[node name="gecis_efekti" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[connection signal="pressed" from="Panel/VBoxContainer/oyna" to="." method="_on_oyna_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/ayarlar" to="." method="_on_ayarlar_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/hakkinda" to="." method="_on_hakkinda_pressed"]

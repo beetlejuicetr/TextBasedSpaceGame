@@ -1,0 +1,50 @@
+,tr_TR,en_US
+mn1,Oyna,Play
+mn2,Ayarlar,Settings
+mn3,Hakkında,About
+ayar1,Ses seviyesi,Volume
+credit1,Gelistirici,Developer
+prit1_1,Grrr!! Ya malınızı verin ya da canınızı!!,Grrr!! Either give your property or your life!!
+prit1_2,Iste böyle! Simdi buradan ikileyin yoksa sizi yok ederim!!,That's it! Now get away from here or I will destroy you!!
+prit1_3,Sizi sefil ise yaramaz yaratiklar!! Bana saldirmaya nasıl curet edersiniz!!,You miserable useless creatures!! How dare you attack me!!
+prit2_1,Grrr!! Benim bölgeme kimse giremez!! Ölmeye kendini hazırla!!,Grrr!! No one can enter my territory!! Prepare yourself to die!!
+prit2_2,Hahahaha!! Isini bilen birisine benziyorsun. Her neyse simdi buradan uzaklasman icin biraz süre tanıyacagım.,"Hahaha!! You seem like a knowledgable person. Anyway, I'm going to give you some time to get away from here now."
+prit2_3,Seni aptal!! beni yenebileceginimi düsündün acıyorum sana...,"You fool!! You thought you could beat me, I pity you..."
+tic1,Bir çok kargo bölümü olan bir gemi size yaklasıyor ve kısa bir süre sonra geminize bir cagri gelir.,A ship with many cargo compartments is approaching you and shortly after you receive a call to your ship.
+tic1_1,Merhabalar! Biz galaksiler arasi tuccar gemisiyiz. Eminim ihtiyacin olan hersey bizde vardır.,Hello! We are an intergalactic merchant ship. I'm sure we have everything you need.
+worm,Bir solucan deligi ile karsilastin. Solucak delikleri uzayda nadir olarak görülür bir efsaneye göre uzayın başka bir köşesine açılan bir kapı oldugu söylenir.,"You come across a wormhole. Wormholes are rarely seen in space. According to a legend, it is said to be a door to another corner of space."
+shipbroke,Bir gemi enkazı ile karsilastin. Bu olay korsanların planladığı hain bir pusu olabilir dikkatli ol!.,"You came across a shipwreck. This event may be a treacherous ambush planned by pirates, be careful!."
+hastalik,Mürettebatında bir hastalik belirdi.,An illness appeared in his crew.
+null,null,null
+mental,Mürettebatınız uzayda çok uzun süre kaldı ve şimdi moralleri bozuk.,"Your crew's been in space too long, and now they're demoralized."
+enginebroke,Motorun artık eskisi kadar islevli degil. Sanırım onarılması gerek.,The engine is no longer as functional as it used to be. I think it needs to be repaired.
+yardimcagri,Yakın bir yerden yardım cagrısı geliyor. Gidip bir bakmak isteyebilirsin. Unutma korsanlar tuzak hazırmasta olabilir.,"A call for help is coming from somewhere nearby. You might want to go and have a look. Remember, pirates may be ready for a trap."
+astroid,Asteroid kusagi ile karsilastin. Icinden gecmek geminin govdesine büyük hasar verebilir.,You have encountered the asteroid belt. Passing through it can cause extensive damage to the ship's hull.
+spaceanomaly,Uzay anomalisi ile karsilastin yakinina yaklasma ciddi bir tehlike arz edebilir.,Approaching the space anomaly in close proximity can present a serious hazard.
+prit1,Bir grup korsan geminize dogru yaklasti. Guclu silahlarla donanmıs gemilerinden size bir cagrı yapiyor.,"A group of pirates approached your ship. He is making a call to you from his ships, armed with powerful weapons."
+prit2,Bir grup korsan geminize dogru yaklasti. Guclu silahlarla donanmıs gemilerinden size bir cagrı yapiyor.,"A group of pirates approached your ship. He is making a call to you from his ships, armed with powerful weapons."
+bsprit,Korsan Saldırısı,Pirate Attack
+bstic,Tüccar,Trader
+bsworm,Solucan Deligi,Worm Hole
+bsshipbroke,Gemi enkazı,Shipwreck
+bshastalik,Hastalık,Disease
+bsmental,Mental Cöküntü,Mental Breakdown
+bsenginebroke,Motor Hasarı,Engine Damage
+bsyardimcagri,Yardım Cagrısı,Rescue Call
+neyapcan,Ne yapıcaksınız?,What will you do?
+prisec1,Saldır,Attack
+prisec2,Kac,Escape
+prisec3,Istediklerini ver,Give them what they want
+ticsec1,Market,Market
+ticsec2,Ayrıl,Leave
+,,
+,,
+gm1,Gemi,Ship
+gm2,Harita,Map
+gm3,Market,Market
+,,
+yemek,Yemek,Food
+yakit,Yakıt,Fuel
+gemi,Govde Parcası,Hull Part
+motor,Motor Parcası,Engine Part
+moral,Murettebat Morali,Crew Morale

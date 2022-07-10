@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+
+[deps]
+
+files=[ "res://data/diller/aciklamalar.tr_TR.translation", "res://data/diller/aciklamalar.en_US.translation" ]
+
+source_file="res://data/diller/aciklamalar.csv"
+dest_files=[ "res://data/diller/aciklamalar.tr_TR.translation", "res://data/diller/aciklamalar.en_US.translation" ]
+
+[params]
+
+compress=true
+delimiter=0

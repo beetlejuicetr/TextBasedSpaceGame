@@ -1,0 +1,344 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://menu/assets/KdamThmorPro-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://game/Game.gd" type="Script" id=2]
+[ext_resource path="res://game/ship_panel.gd" type="Script" id=3]
+[ext_resource path="res://menu/gevis_efekti.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/map_panel.gd" type="Script" id=5]
+[ext_resource path="res://game/paneller/market.tscn" type="PackedScene" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=27]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 1 )
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.137255, 0.137255, 0.137255, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.054902, 0.364706, 0.0352941, 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+Button/styles/focus = SubResource( 27 )
+Button/styles/hover = SubResource( 5 )
+Button/styles/normal = SubResource( 6 )
+Button/styles/pressed = SubResource( 7 )
+
+[sub_resource type="Shader" id=1]
+code = "//---CRT Shader---
+shader_type canvas_item;
+
+uniform float scanline_count : hint_range(0, 1800) = 50.0;
+
+vec2 uv_curve(vec2 uv)
+{
+	uv = (uv - 0.5) * 2.0;
+	
+	//You can modify the numbers and try different values
+	uv.x *= 1.1 + pow(abs(uv.y) / 3.0, 2.0);
+	uv.y *= 1.1 + pow(abs(uv.x) / 3.0, 2.0);
+	
+	//The scale part (you can delete it when you want)
+	uv /= 1.2;
+	
+	uv = (uv/2.0) + 0.5;
+	return uv;
+}
+
+
+void fragment()
+{	
+	float PI = 3.14159;
+	
+	//You can modify the *3.0, *-3.0 for a bigger or smaller 
+	float r = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*0.0), 0.0).r;
+	float g = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*2.0), 0.0).g;
+	float b = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x*-2.0), 0.0).b;
+	
+	
+	//If you dont want scanlines you can just delete this part
+	float s = sin(uv_curve(SCREEN_UV).y * scanline_count * PI * 2.0);
+	s = (s * 0.5 + 0.5) * 0.9 + 0.1;
+	vec4 scan_line = vec4(vec3(pow(s, 0.25)), 1.0);
+	
+	
+	COLOR = vec4(r, g, b, 1.0) * scan_line;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/scanline_count = 90.0
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.0156863, 0.27451, 0, 0.596078 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.384314, 0.384314, 0.384314, 0.109804 )
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxFlat" id=13]
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 8 )
+Button/styles/focus = SubResource( 10 )
+Button/styles/hover = SubResource( 11 )
+Button/styles/normal = SubResource( 12 )
+Button/styles/pressed = SubResource( 13 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=15]
+default_font = SubResource( 14 )
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.443137, 0.443137, 0.443137, 1 )
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.262745, 0.262745, 0.262745, 1 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.00784314, 0.329412, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=16]
+default_font = SubResource( 20 )
+Button/styles/focus = SubResource( 23 )
+Button/styles/hover = SubResource( 24 )
+Button/styles/normal = SubResource( 25 )
+Button/styles/pressed = SubResource( 26 )
+OptionButton/styles/hover = SubResource( 17 )
+OptionButton/styles/normal = SubResource( 18 )
+OptionButton/styles/pressed = SubResource( 19 )
+
+[sub_resource type="DynamicFont" id=21]
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=22]
+default_font = SubResource( 21 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="BORDER1" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+color = Color( 0.0745098, 0.0666667, 0.0666667, 1 )
+
+[node name="BORDER2" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -80.0
+color = Color( 0.0745098, 0.0666667, 0.0666667, 1 )
+
+[node name="BORDER3" type="ColorRect" parent="."]
+anchor_bottom = 1.0
+margin_right = 80.0
+color = Color( 0.0745098, 0.0666667, 0.0666667, 1 )
+
+[node name="BORDER4" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_bottom = 100.0
+color = Color( 0.0745098, 0.0666667, 0.0666667, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -640.0
+margin_top = 15.0
+margin_right = 640.0
+margin_bottom = 95.0
+theme = SubResource( 4 )
+alignment = 1
+
+[node name="ship_btn" type="Button" parent="HBoxContainer"]
+margin_left = 336.0
+margin_right = 536.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 200, 70 )
+text = "Ship"
+
+[node name="map_btn" type="Button" parent="HBoxContainer"]
+margin_left = 540.0
+margin_right = 740.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 200, 70 )
+text = "Map"
+
+[node name="market_btn" type="Button" parent="HBoxContainer"]
+margin_left = 744.0
+margin_right = 944.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 200, 70 )
+text = "Market"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="tv_glitch" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+
+[node name="ship_panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -373.0
+margin_top = -204.0
+margin_right = 373.0
+margin_bottom = 204.0
+theme = SubResource( 9 )
+script = ExtResource( 3 )
+
+[node name="durum" type="Label" parent="ship_panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 154.0
+margin_top = -36.0
+margin_right = 258.0
+margin_bottom = 40.0
+theme = SubResource( 15 )
+text = "%10"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ship_panel"]
+margin_right = 334.0
+margin_bottom = 408.0
+
+[node name="murettebat_morali" type="Button" parent="ship_panel/VBoxContainer"]
+margin_right = 334.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+text = "Murettebat Morali"
+
+[node name="yemek_durum" type="Button" parent="ship_panel/VBoxContainer"]
+margin_top = 84.0
+margin_right = 334.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 0, 80 )
+text = "Yemek"
+
+[node name="yakit_durum" type="Button" parent="ship_panel/VBoxContainer"]
+margin_top = 168.0
+margin_right = 334.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 0, 80 )
+text = "Yakıt"
+
+[node name="Govde_parcasi" type="Button" parent="ship_panel/VBoxContainer"]
+margin_top = 252.0
+margin_right = 334.0
+margin_bottom = 332.0
+rect_min_size = Vector2( 0, 80 )
+text = "Gövde parcasi"
+
+[node name="motor_parcasi" type="Button" parent="ship_panel/VBoxContainer"]
+margin_top = 336.0
+margin_right = 334.0
+margin_bottom = 416.0
+rect_min_size = Vector2( 0, 80 )
+text = "Motor parçası"
+
+[node name="ColorRect" type="ColorRect" parent="ship_panel"]
+margin_left = 369.0
+margin_right = 383.0
+margin_bottom = 416.0
+color = Color( 1, 1, 1, 0.54902 )
+
+[node name="map_panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -373.0
+margin_top = -204.0
+margin_right = 373.0
+margin_bottom = 204.0
+theme = SubResource( 16 )
+script = ExtResource( 5 )
+
+[node name="sisteme_git_btn" type="Button" parent="map_panel"]
+visible = false
+margin_left = 586.0
+margin_top = 336.0
+margin_right = 723.0
+margin_bottom = 376.0
+text = "Gİit"
+
+[node name="bilgiler" type="Panel" parent="map_panel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = -183.0
+margin_bottom = 128.0
+
+[node name="sistem_adi" type="Label" parent="map_panel/bilgiler"]
+margin_right = 146.0
+margin_bottom = 50.0
+text = "sistem adı"
+
+[node name="sistem_bilgi" type="RichTextLabel" parent="map_panel/bilgiler"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 50.0
+theme = SubResource( 22 )
+custom_colors/default_color = Color( 0.662745, 0.662745, 0.662745, 1 )
+bbcode_enabled = true
+bbcode_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra tortor at faucibus convallis. Cras a ex erat. In a ex urna. Vivamus ut tellus in elit pretium ornare. Praesent suscipit tellus vitae mattis laoreet. Fusce ullamcorper rutrum risus. Ut sed quam vitae lectus mollis venenatis. Vestibulum semper tortor nec nulla congue, pellentesque dapibus nisl facilisis. Aenean id orci ac risus euismod dictum quis vel mi. Suspendisse potenti."
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra tortor at faucibus convallis. Cras a ex erat. In a ex urna. Vivamus ut tellus in elit pretium ornare. Praesent suscipit tellus vitae mattis laoreet. Fusce ullamcorper rutrum risus. Ut sed quam vitae lectus mollis venenatis. Vestibulum semper tortor nec nulla congue, pellentesque dapibus nisl facilisis. Aenean id orci ac risus euismod dictum quis vel mi. Suspendisse potenti."
+
+[node name="market_panel" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="gecis_efekti" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[connection signal="pressed" from="HBoxContainer/ship_btn" to="." method="_on_ship_btn_pressed"]
+[connection signal="pressed" from="HBoxContainer/map_btn" to="." method="_on_map_btn_pressed"]
+[connection signal="pressed" from="HBoxContainer/market_btn" to="." method="_on_market_btn_pressed"]
+[connection signal="pressed" from="ship_panel/VBoxContainer/murettebat_morali" to="ship_panel" method="_on_murettebat_morali_pressed"]
+[connection signal="pressed" from="ship_panel/VBoxContainer/yemek_durum" to="ship_panel" method="_on_yemek_durum_pressed"]
+[connection signal="pressed" from="ship_panel/VBoxContainer/yakit_durum" to="ship_panel" method="_on_yakit_durum_pressed"]
+[connection signal="pressed" from="ship_panel/VBoxContainer/Govde_parcasi" to="ship_panel" method="_on_Govde_parcasi_pressed"]
+[connection signal="pressed" from="ship_panel/VBoxContainer/motor_parcasi" to="ship_panel" method="_on_motor_parcasi_pressed"]
+[connection signal="pressed" from="map_panel/sisteme_git_btn" to="map_panel" method="_on_sisteme_git_btn_pressed"]
